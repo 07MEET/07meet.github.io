@@ -25,7 +25,7 @@ http.createServer(async (req, res) => {
     const info = await stat(file);
     if (info.isDirectory()) file = path.join(file, 'index.html');
     const body = await readFile(file);
-    res.writeHead(200, { 'Content-Type': types[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-cache' });
+    res.writeHead(200, { 'Content-Type': path.extname(file) === '.ttf' ? 'font/ttf' : types[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-cache' });
     if (req.method === 'HEAD') res.end(); else res.end(body);
   } catch {
     res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
