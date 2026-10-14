@@ -1,0 +1,13 @@
+dist/
+node_modules/
+.DS_Store
+Thumbs.db
+tmp/
+*.log
+# Keep the supplied originals private. A selected public copy goes in public/.
+/New_Resume_BTechAIML.pdf
+/OFFCAMPUS_RESUME.pdf
+/tmp-resume-*.png
+/docs/content-review.md
+/docs/project-evidence.md
+/docs/qa-plan.md

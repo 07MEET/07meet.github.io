@@ -1,0 +1,142 @@
+{
+  "name": "Meet Dineshchandra Patel",
+  "shortName": "Meet Patel",
+  "siteUrl": "https://07MEET.github.io",
+  "basePath": "/portfolio/",
+  "title": "Meet Patel — AI/ML & Data Portfolio",
+  "description": "Meet Patel is an AI/ML student at NMIMS, graduating in 2027. Explore selected work in document retrieval, pollution forecasting, and PostgreSQL applications.",
+  "email": "meetpatel132465@gmail.com",
+  "github": "https://github.com/07MEET",
+  "linkedin": "https://www.linkedin.com/in/meet-patel-aiml/",
+  "resume": "resume.pdf",
+  "hero": {
+    "eyebrow": "AI/ML student · Class of 2027",
+    "headline": "Building with data,",
+    "emphasis": "from search to forecasting.",
+    "intro": "I'm Meet, a B.Tech AI/ML student at NMIMS, graduating in 2027. I build document search tools, forecasting models, and database applications with Python and SQL.",
+    "availability": "Open to AI/ML, data engineering & analyst opportunities"
+  },
+  "projects": [
+    {
+      "id": "copilot",
+      "number": "01",
+      "category": "Retrieval & backend development",
+      "title": "Enterprise Knowledge Copilot",
+      "summary": "Making internal documents easier to search, with answers that point back to the source page.",
+      "context": "An internship project exploring retrieval across policies, SOPs, and technical documentation.",
+      "technologies": ["Python", "FastAPI", "ChromaDB", "BM25"],
+      "repository": "https://github.com/07MEET/enterprise-knowledge-copilot",
+      "highlights": ["OCR document ingestion", "Hybrid retrieval", "Page-level citations"],
+      "details": [
+        {
+          "heading": "The problem",
+          "text": "Useful information was spread across policies, SOPs, and technical documents. The project explores how to retrieve relevant passages and return answers with traceable source pages."
+        },
+        {
+          "heading": "What I built",
+          "text": "A Python ingestion and retrieval workflow using Docling OCR, semantic search in ChromaDB, BM25 keyword search, reciprocal rank fusion, and FastAPI endpoints."
+        },
+        {
+          "heading": "An important decision",
+          "text": "Combine semantic and keyword results so both meaning and exact terminology can contribute to retrieval. Preserve page information to make the cited evidence inspectable."
+        },
+        {
+          "heading": "Evidence & scope",
+          "text": "The repository includes a 20-case model-judged evaluation harness covering faithfulness, context recall, answer relevance, latency, and intended refusals. The implementation and committed evaluation report are available to review."
+        }
+      ]
+    },
+    {
+      "id": "forecasting",
+      "number": "02",
+      "category": "Applied machine learning · Team project",
+      "title": "PM2.5 Forecasting System",
+      "summary": "Learning how air pollution changes across space and time, using historical observations and weather inputs.",
+      "context": "Contributed to VibeCoders' winning solution and developed a modular PyTorch forecasting repository.",
+      "technologies": ["Python", "PyTorch", "NumPy", "xarray"],
+      "repository": "https://github.com/07MEET/pm25-forecasting-system",
+      "teamRepository": "https://github.com/kartiks15/ANRF_AISEHack_VibeCoders",
+      "highlights": ["ConvLSTM encoder–decoder", "Wind-aware transport", "Training & evaluation workflows"],
+      "award": {
+        "title": "1st place · Pollution Forecasting track",
+        "description": "Team VibeCoders · AISEHack 2026",
+        "url": "https://precog.iiit.ac.in/aisehack/past-editions/edition-1"
+      },
+      "details": [
+        {
+          "heading": "The problem",
+          "text": "Forecast future PM2.5 concentrations on a spatial grid from historical pollutant observations and meteorological variables."
+        },
+        {
+          "heading": "The implementation",
+          "text": "Developed the modular forecasting repository, implementing a PyTorch model with multiscale encoding, ConvLSTM recurrence, attention, and wind-based spatial warping. The model uses 10 historical steps to generate 16 forecast steps on a 140 × 124 grid."
+        },
+        {
+          "heading": "An important decision",
+          "text": "Model spatial relationships and time together, and include wind information to represent the movement of pollution across the grid."
+        },
+        {
+          "heading": "Evidence & scope",
+          "text": "The official event archive confirms Team VibeCoders' first place in the Pollution Forecasting track. The personal repository provides a modular model, configuration, and inference workflow; the team repository preserves the competition submission."
+        }
+      ]
+    },
+    {
+      "id": "hospital",
+      "number": "03",
+      "category": "Database design & application development",
+      "title": "Hospital Management System",
+      "summary": "Connecting hospital workflows through a relational database, with role-specific access and reporting.",
+      "context": "A database application covering patient records, appointments, billing, and staff workflows.",
+      "technologies": ["PostgreSQL", "SQL", "Python", "Streamlit"],
+      "repository": "https://github.com/07MEET/hospital-management-system",
+      "highlights": ["Six staff dashboards", "Appointment constraints", "Audit logs & reporting views"],
+      "details": [
+        {
+          "heading": "The problem",
+          "text": "Keep connected hospital records consistent while providing different workflows for staff roles, from appointments and patient records to billing and reports."
+        },
+        {
+          "heading": "What I built",
+          "text": "A PostgreSQL database application with a Python interface, staff roles, stored procedures, reporting views, and JSONB audit records."
+        },
+        {
+          "heading": "An important decision",
+          "text": "Use database triggers to check appointment conflicts and record changes in JSONB audit logs. Expose patient history, daily appointments, outstanding bills, and low stock through reporting views."
+        },
+        {
+          "heading": "Evidence & scope",
+          "text": "An academic database application with the schema, SQL workflows, and Python interface available in the repository. The reporting views cover patient history, daily appointments, outstanding bills, and low stock."
+        }
+      ]
+    }
+  ],
+  "experience": {
+    "role": "AI/ML Intern",
+    "organization": "Supreet Chemicals Limited",
+    "dates": "June — July 2026",
+    "description": "Worked on information retrieval for internal policies, SOPs, and technical documentation in a chemical manufacturing setting.",
+    "contribution": "Built the ingestion, retrieval, citation, and API workflows behind the Enterprise Knowledge Copilot.",
+    "project": "copilot"
+  },
+  "about": {
+    "intro": "I'm studying Artificial Intelligence and Machine Learning at NMIMS, with an expected graduation in 2027. My projects cover model training, document retrieval, database design, and Python application development.",
+    "capabilities": [
+      { "title": "Applied machine learning", "description": "Model implementation, spatiotemporal inputs, training and evaluation.", "project": "forecasting", "linkLabel": "See forecasting work" },
+      { "title": "Retrieval & APIs", "description": "OCR ingestion, hybrid search, source citations, and FastAPI.", "project": "copilot", "linkLabel": "See the knowledge copilot" },
+      { "title": "Data systems", "description": "PostgreSQL schemas, SQL workflows, audit records, and reporting views.", "project": "hospital", "linkLabel": "See database work" }
+    ]
+  },
+  "education": {
+    "degree": "B.Tech · Artificial Intelligence & Machine Learning",
+    "institution": "SVKM's NMIMS",
+    "school": "Mukesh Patel School of Technology Management & Engineering",
+    "dates": "2023 — 2027",
+    "grade": "CGPA 3.86 / 4.00 · through semester 6"
+  },
+  "contact": {
+    "headline": "Let's talk about",
+    "emphasis": "what comes next.",
+    "intro": "I'm looking for AI/ML, data engineering, and analyst opportunities. If my work fits your team, I'd be glad to hear from you."
+  }
+}
