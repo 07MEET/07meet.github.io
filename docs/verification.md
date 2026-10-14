@@ -1,6 +1,6 @@
 # Verification record
 
-Checks completed on 14 October 2026 against the production build served at **http://127.0.0.1:4173/portfolio/**. The browser used was headless Chrome through Playwright. Source data comes from the supplied resumes, public repositories, the official AISEHack archive, and the owner's answers; see [content review](content-review.md) and [project evidence](project-evidence.md).
+Checks completed on 14 October 2026 against the local production build and the live [GitHub Pages website](https://07meet.github.io/portfolio/). The browser used was headless Chrome through Playwright. Content comes from the supplied resumes, linked public repositories, the [official AISEHack archive](https://precog.iiit.ac.in/aisehack/past-editions/edition-1), and the owner's answers. The [public resume](../public/resume.pdf) was explicitly approved for download.
 
 ## Local results
 
@@ -47,6 +47,8 @@ The site uses repository links and labeled architecture/schema illustrations. No
 
 ## Production status
 
-At the time of this local check, live deployment verification was pending. After deployment, confirm the actual Pages URL, successful Actions run, HTTPS, production asset paths, contact links, resume download, and mobile navigation. Record the result here before final delivery.
+The [GitHub Actions deployment](https://github.com/07MEET/portfolio/actions/runs/38523247703) succeeded. Authenticated Pages settings show `build_type: workflow` and HTTPS enforcement enabled. The source is in [07MEET/portfolio](https://github.com/07MEET/portfolio).
+
+Live Chrome checks passed at 1440 px and 390 px: the homepage returned HTTP 200, no horizontal overflow occurred, all illustrations loaded, the canonical URL matched the live origin, and no JavaScript errors were observed. CSS, navigation JavaScript, illustrations, and favicon returned HTTP 200. The live PDF returned `application/pdf`, matched the approved 123,271-byte file exactly, and the social PNG returned HTTP 200. An unknown route returned HTTP 404 with the styled custom page. The live desktop and mobile layouts were visually inspected after these checks.
 
 No custom domain has been selected or registered. Namecheap eligibility for NMIMS India and domain availability remain unconfirmed; [deployment guide](deployment.md) records the official offer, differing renewal prices, and DNS/HTTPS steps.

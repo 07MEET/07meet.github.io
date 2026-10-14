@@ -1,10 +1,10 @@
 # Deployment and domain guide
 
-Checked against official sources on 14 October 2026. This guide prepares a deployment; it does not mean the repository, Pages website, or custom domain has been created.
+Checked against official sources on 14 October 2026. The portfolio has been published to GitHub Pages and verified over HTTPS. No custom domain has been registered or configured.
 
 ## GitHub Pages first
 
-The proposed public repository is `07MEET/portfolio`, with the proposed address **https://07MEET.github.io/portfolio/**. The owner has reported no existing portfolio repository. Public checks could not establish authenticated repository settings, so inspect them before changing anything when publishing.
+The public repository is [07MEET/portfolio](https://github.com/07MEET/portfolio), with the live address **https://07meet.github.io/portfolio/**. Authenticated inspection confirmed that the repository did not exist before creation. It now publishes through GitHub Actions with HTTPS enforced. [Successful deployment](https://github.com/07MEET/portfolio/actions/runs/38523247703)
 
 GitHub Pages is available for public repositories on GitHub Free. You do **not** need the Student Developer Pack to host this site. The portfolio contains static HTML, CSS, JavaScript, and images; the Node build runs before deployment and no server runs on Pages. [GitHub Pages documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)
 
@@ -13,9 +13,9 @@ GitHub Pages is available for public repositories on GitHub Free. You do **not**
 From the repository directory, with Node.js 24 installed:
 
 ```powershell
-npm run build
-npm run check
-npm run dev
+node scripts/build.mjs
+node scripts/check.mjs
+node scripts/serve.mjs
 ```
 
 Open **http://127.0.0.1:4173/portfolio/**. The production files are generated in `dist/`. Change portfolio copy in [content/site.json](../content/site.json), then rebuild. Do not edit generated files in `dist/`.
@@ -23,7 +23,7 @@ Open **http://127.0.0.1:4173/portfolio/**. The production files are generated in
 ### Publish the prepared site
 
 1. Sign into GitHub as `07MEET` using normal account authorization. Create a public repository named `portfolio` if it does not exist. If it exists, inspect its contents, default branch, Actions, Pages settings, and any domain before proceeding.
-2. Upload or push the source on the `main` branch. Review the proposed tracked files first: the original source resumes, research notes, and temporary inspection files should not be published. A downloadable resume should be included only after approval.
+2. Upload or push the source on the `main` branch. Review the tracked files first: the original source resumes, research notes, and temporary inspection files are excluded. The explicitly approved off-campus resume is included as `public/resume.pdf`.
 3. In the repository, open **Settings → Pages → Build and deployment**, and choose **GitHub Actions** as the source.
 4. The prepared [deployment workflow](../.github/workflows/deploy.yml) builds and checks the site, uploads only `dist/`, and deploys it through GitHub's Pages actions. A push to `main` starts it; **Actions → Deploy portfolio to GitHub Pages → Run workflow** can also start a deployment manually.
 5. Wait for the Actions run to succeed. Open the deployment URL reported by its `github-pages` environment. Check the live homepage, project pages, assets, contact link, social links, and approved resume download.
@@ -88,4 +88,4 @@ For a subdomain such as `portfolio.example.me`, use a CNAME with host `portfolio
 
 4. Wait for the Pages DNS check and certificate provisioning. Enable **Enforce HTTPS** when available, and verify both the selected address and its redirect variant. GitHub obtains the certificate automatically; the separate Namecheap certificate offer does not need to be installed. Check that assets use HTTPS and that no conflicting website records prevent certificate issuance. [GitHub HTTPS setup](https://docs.github.com/en/pages/getting-started-with-github-pages/securing-your-github-pages-site-with-https)
 
-No domain registration, DNS changes, account settings, or public deployment have been performed by preparing this guide.
+The public repository and GitHub Pages publishing settings were created with the owner's existing GitHub authorization. No domain registration or DNS changes were performed.
