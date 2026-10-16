@@ -13,7 +13,7 @@ const origin = config.siteUrl ?? config.site?.siteUrl ?? 'https://07MEET.github.
 const pageDefinitions = [
   { name: 'Home', file: 'index.html', route: '' },
   { name: 'Projects', file: 'projects/index.html', route: 'projects/' },
-  { name: 'Internship', file: 'internship/index.html', route: 'internship/' },
+  { name: 'Legacy internship', file: 'internship/index.html', route: 'internship/', redirect: true },
   { name: 'About', file: 'about/index.html', route: 'about/' },
   { name: '404', file: '404.html', route: '404.html' }
 ];
@@ -60,6 +60,15 @@ async function checkResource(link, page) {
 }
 for (const page of pages) {
   const { html, name, meta, links } = page;
+  if (page.redirect) {
+    const target = new URL(base + 'projects/#copilot', origin).href;
+    const canonical = links.find(x => x.rel === 'canonical')?.href;
+    requireCheck(Boolean(canonical) && new URL(canonical).href === target.split('#')[0], 'Legacy internship: canonical must point to Projects.');
+    requireCheck(meta.some(x => x['http-equiv']?.toLowerCase() === 'refresh' && /^\s*0\s*;\s*url\s*=/i.test(x.content ?? '') && x.content?.includes(base + 'projects/#copilot')), 'Legacy internship: missing immediate redirect to Projects#copilot.');
+    requireCheck(links.some(x => { try { return Boolean(x.href) && new URL(x.href, page.url).href === target; } catch { return false; } }), 'Legacy internship: missing usable fallback link.');
+    for (const link of links) if (link.href) await checkResource(link.href, page);
+    continue;
+  }
   requireCheck((html.match(/<h1\b/gi) || []).length === 1, `${name}: exactly one h1 required.`);
   requireCheck(/<html[^>]+lang="en"/i.test(html), `${name}: declare the page language.`);
   const title = html.match(/<title>([^<]+)<\/title>/i)?.[1];
@@ -97,20 +106,28 @@ for (const page of pages) {
   }
   if (name !== '404') {
     const header = html.match(/<header\b[\s\S]*?<\/header>/i)?.[0] ?? '';
+    requireCheck(/<svg\b[^>]*class="[^"]*\bwordmark-symbol\b/.test(header), `${name}: missing SVG brand mark.`);
     const resumeLinks = [...html.matchAll(/<a\b[^>]*href="[^"]*resume\.pdf"[^>]*>/gi)];
     requireCheck(resumeLinks.length === 1, `${name}: require one resume link.`);
     requireCheck(/<a\b[^>]*href="[^"]*resume\.pdf"/.test(header), `${name}: resume link must be in shared header.`);
-    for (const route of ['', 'projects/', 'internship/', 'about/']) {
+    for (const route of ['', 'projects/', 'about/']) {
       requireCheck(header.includes(`href="${base + route}"`), `${name}: missing header route ${base + route}`);
     }
+    requireCheck(!header.includes(`href="${base}internship/"`), `${name}: legacy Internship should not appear in navigation.`);
+    requireCheck(/<button\b[^>]*class="[^"]*\btheme-toggle\b/.test(header), `${name}: missing accessible theme control.`);
   }
   if (name === 'About') requireCheck(html.includes(`mailto:${config.email ?? 'meetpatel132465@gmail.com'}`), 'About: missing approved public email link.');
   else requireCheck(!/<a\b[^>]*href="mailto:/i.test(html), `${name}: contact email should be on About only.`);
-  if (name !== 'Internship') requireCheck(!html.includes('https://github.com/07MEET/enterprise-knowledge-copilot'), `${name}: Enterprise Knowledge Copilot belongs on Internship only.`);
+  if (name !== 'Projects') requireCheck(!html.includes('https://github.com/07MEET/enterprise-knowledge-copilot'), `${name}: Enterprise Knowledge Copilot belongs on Projects only.`);
 }
 const projects = pages.find(x => x.name === 'Projects')?.html ?? '';
-for (const repo of ['pm25-forecasting-system', 'hospital-management-system']) requireCheck(projects.includes(`https://github.com/07MEET/${repo}`), `Projects: missing repository ${repo}.`);
-requireCheck((pages.find(x => x.name === 'Internship')?.html ?? '').includes('https://github.com/07MEET/enterprise-knowledge-copilot'), 'Internship: missing Enterprise Knowledge Copilot repository.');
+for (const repo of ['enterprise-knowledge-copilot', 'pm25-forecasting-system', 'hospital-management-system']) requireCheck(projects.includes(`https://github.com/07MEET/${repo}`), `Projects: missing repository ${repo}.`);
+requireCheck(projects.match(/<article\b[^>]*\bid="([^"]+)"/)?.[1] === 'copilot', 'Projects: Enterprise Knowledge Copilot must be the first case study.');
+requireCheck(/\bid="research"/.test(projects), 'Projects: missing linkable Research section.');
+requireCheck(/VL[\s-]?JEPA/i.test(projects) && /ongoing/i.test(projects), 'Projects: VL-JEPA research must be labeled as ongoing.');
+requireCheck(projects.includes('assets/aisehack.webp'), 'Projects: missing supplied AISEHack award photo.');
+const about = pages.find(x => x.name === 'About')?.html ?? '';
+requireCheck(/CGPA/.test(about) && !/through\s+semester|semester\s+6/i.test(about), 'About: show CGPA without the old semester qualifier.');
 requireCheck((pages.find(x => x.name === 'Home')?.html ?? '').includes('assets/meet-patel.webp'), 'Home: missing supplied portrait.');
 for (const file of ['404.html', 'robots.txt', 'sitemap.xml']) {
   try { await stat(path.join(dist, file)); } catch { failures.push(`Missing generated ${file}.`); }
@@ -118,15 +135,18 @@ for (const file of ['404.html', 'robots.txt', 'sitemap.xml']) {
 const css = await readFile(path.join(dist, 'site.css'), 'utf8').catch(() => '');
 requireCheck(/prefers-reduced-motion/.test(css), 'Missing reduced-motion support.');
 requireCheck(/focus-visible/.test(css), 'Missing visible keyboard focus style.');
+requireCheck(/data-theme[^\n]*dark/.test(css), 'Missing dark theme styles.');
+requireCheck(/prefers-color-scheme/.test(css), 'Missing system colour preference fallback.');
 requireCheck(/@font-face/.test(css) && /manrope/i.test(css), 'Missing self-hosted Manrope font declaration.');
 for (const resource of css.matchAll(/url\(\s*["']?([^"')\s]+)["']?\s*\)/g)) await checkResource(resource[1], { ...pages[0], name: 'CSS', url: new URL(base + 'site.css', origin) });
 try {
   const sitemap = await readFile(path.join(dist, 'sitemap.xml'), 'utf8');
-  for (const page of pages.filter(x => x.name !== '404')) requireCheck(sitemap.toLowerCase().includes(page.url.href.toLowerCase()), `Sitemap omits ${page.name}.`);
+  for (const page of pages.filter(x => x.name !== '404' && !x.redirect)) requireCheck(sitemap.toLowerCase().includes(page.url.href.toLowerCase()), `Sitemap omits ${page.name}.`);
+  requireCheck(!sitemap.toLowerCase().includes(new URL(base + 'internship/', origin).href.toLowerCase()), 'Sitemap should not include the legacy redirect.');
 } catch {}
 if (failures.length) {
   console.error(failures.map(x => `FAIL: ${x}`).join('\n'));
   process.exitCode = 1;
 } else {
-  console.log(`Static checks passed: ${pages.length} pages, unique metadata, shared navigation, privacy, ${localCount} local resources, cross-page anchors, selected work, portrait/font assets, focus and reduced motion.`);
+  console.log(`Static checks passed: 3 pages, legacy redirect, 404, unique metadata, shared navigation, privacy, ${localCount} local resources, cross-page anchors, selected work/research, portrait/font assets, themes, focus and reduced motion.`);
 }

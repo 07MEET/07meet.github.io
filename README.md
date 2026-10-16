@@ -1,6 +1,6 @@
 # Meet Patel's portfolio
 
-A static portfolio for AI/ML, data engineering, and analyst opportunities. Four pages separate Home, Projects, Internship, and About. A neutral light palette, navy text, blue accents, and self-hosted Manrope typography accompany Meet's portrait.
+A static portfolio for AI/ML, data engineering, and analyst opportunities. Home, Projects, and About use self-hosted Manrope typography and Meet's portrait. The original light palette is paired with a slate dark theme; visitors can switch themes and their choice is remembered in their browser.
 
 [Portfolio](https://07MEET.github.io/portfolio/) · [GitHub](https://github.com/07MEET) · [LinkedIn](https://www.linkedin.com/in/meet-patel-aiml/)
 
@@ -19,7 +19,7 @@ Open http://127.0.0.1:4173/portfolio/. Stop the preview with Ctrl+C. After editi
 ## Update the website
 
 - Edit names, introduction, project descriptions, links, experience, education, and contact details in [content/site.json](content/site.json). Keep project IDs consistent with the capability and experience links.
-- Adjust colours, typography, and spacing in [public/site.css](public/site.css). The colour variables are grouped at the top. [Colour samples](docs/theme-samples.html) show the five original directions and their contrast ratios.
+- Adjust colours, typography, and spacing in [public/site.css](public/site.css). Light and dark colour variables are grouped at the top. [Colour samples](docs/theme-samples.html) preserve the original design exploration.
 - Replace [public/resume.pdf](public/resume.pdf) when the resume changes. The approved off-campus resume is the current download. The `resume` field points to `resume.pdf`.
 - Replace the portrait at `public/assets/meet-patel.webp` when needed. The original supplied photo remains outside the published source.
 - Add project screenshots to `public/assets/` and set each project's `images` array to objects with `src`, meaningful `alt`, and optional `caption`, `width`, and `height`. Paths such as `assets/project-screen.webp` are relative to the public folder.
@@ -32,9 +32,9 @@ Generated files in `dist/` should not be edited or committed. The original suppl
 
 ## Content choices
 
-Enterprise Knowledge Copilot appears on Internship, connecting the role to document ingestion, retrieval, citations, and APIs. Projects contains PM2.5 Forecasting and Hospital Management System. The forecasting project includes Team VibeCoders' first-place result in AISEHack 2026's Pollution Forecasting track. About contains education, focused capabilities, and the site's contact links. Each page has one resume link in its shared navigation.
+Projects begins with the Supreet Chemicals internship and Enterprise Knowledge Copilot, followed by PM2.5 Forecasting and Hospital Management System. A Research section introduces the ongoing VL-JEPA framework. The former Internship URL forwards to the relevant project. Home provides a concise overview; About contains education, focused capabilities, and contact links. Each page has one resume link in its shared navigation.
 
-The hackathon is evidence for the forecasting project, rather than a duplicate project. Ongoing VL-JEPA work is omitted until there is a reviewable public result. School marks and a long skills inventory are omitted to keep attention on relevant work. Project performance percentages, production adoption, and business impact are not inferred from implementation details.
+The hackathon recognition supports the forecasting project and uses the owner's supplied AISEHack logo. The `research` field in `content/site.json` stores the VL-JEPA description, status, and optional repository. Keep it labelled as ongoing until results are available. School marks and a long skills inventory are omitted. Project performance percentages, production adoption, and business impact are not inferred from implementation details.
 
 ## GitHub Pages and domains
 

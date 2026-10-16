@@ -1,8 +1,51 @@
 const navToggle = document.querySelector('.nav-toggle');
 const nav = document.querySelector('.site-nav');
+const themeToggle = document.querySelector('.theme-toggle');
+const themeStorageKey = 'meet-portfolio-theme';
+const systemTheme = matchMedia('(prefers-color-scheme: dark)');
+let savedTheme;
+
+try {
+  const stored = localStorage.getItem(themeStorageKey);
+  if (stored === 'light' || stored === 'dark') savedTheme = stored;
+} catch {
+  // The current page remains usable when browser storage is unavailable.
+}
+
+const applyTheme = (theme) => {
+  document.documentElement.dataset.theme = theme;
+  if (themeToggle) {
+    themeToggle.setAttribute('aria-pressed', String(theme === 'dark'));
+    themeToggle.title = `Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`;
+  }
+  const color = document.querySelector('meta[name="theme-color"]');
+  if (color) color.content = theme === 'dark' ? '#1b2230' : '#f7f8fc';
+};
+
+applyTheme(savedTheme || (systemTheme.matches ? 'dark' : 'light'));
+document.documentElement.classList.add('has-js');
+
+themeToggle?.addEventListener('click', () => {
+  savedTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  applyTheme(savedTheme);
+  try {
+    localStorage.setItem(themeStorageKey, savedTheme);
+  } catch {
+    // Applying the theme does not depend on saving the preference.
+  }
+});
+
+systemTheme.addEventListener('change', (event) => {
+  if (!savedTheme) applyTheme(event.matches ? 'dark' : 'light');
+});
+
+window.addEventListener('storage', (event) => {
+  if (event.key !== themeStorageKey && event.key !== null) return;
+  savedTheme = event.newValue === 'light' || event.newValue === 'dark' ? event.newValue : undefined;
+  applyTheme(savedTheme || (systemTheme.matches ? 'dark' : 'light'));
+});
 
 if (navToggle && nav) {
-  document.documentElement.classList.add('has-js');
   const close = (restoreFocus = false) => {
     navToggle.setAttribute('aria-expanded', 'false');
     navToggle.setAttribute('aria-label', 'Open navigation');
