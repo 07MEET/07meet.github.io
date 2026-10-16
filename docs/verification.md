@@ -1,36 +1,35 @@
 # Verification record
 
-The portfolio update was checked on 17 October 2026 using the production build and Chrome through Playwright.
+The continuous-page revision was checked on 17 October 2026 using the production build and Chrome through Playwright.
 
-## Full-screen flow and skills revision
+## Structure and content
 
-- Home's opening fills at least the available viewport below the header and grows when mobile content needs more room. A keyboard-accessible scroll cue targets Skills.
-- Hero, Skills, Work, Research, and End backgrounds span the full viewport width and use five distinct colours in both light and dark themes. These dimensions and colour differences were checked at 320, 390, 768, and 1440 px.
-- Skills uses five labelled rows and fourteen badges. Eleven badges have locally hosted technology logos; concepts without a product logo use visible text. All logo images loaded successfully.
-- Desktop and mobile screenshots of the opening, Skills, and the complete page were visually inspected. Text contrast, no horizontal overflow, theme persistence/system fallback, storage denial, keyboard navigation, reduced motion, legacy redirects, and the current resume download all passed again.
-- Technology asset sources and license copies are recorded in `public/assets/icons/`.
+- The main page contains About, Skills, Projects, and Contact in that order. The header stays visible while scrolling and its links move to those sections.
+- The opening keeps the viewport layout with larger text and a larger portrait: name up to 110 px, role 26 px, introduction 21 px, portrait 365 px on desktop; readable mobile sizes include a 240 px portrait.
+- Full-width colour bands and divider lines separate the main sections. Ongoing VL-JEPA research is inside the Projects band and shares its background.
+- Contact is at the end with the public email, GitHub, and LinkedIn. Each page has one resume link in the shared header.
+- Four dedicated project pages contain available explanations, technologies, media placeholders, evidence, and repository links. VL-JEPA remains ongoing and has no invented repository or findings.
+- Legacy About, Projects, and Internship URLs redirect to their current destinations. Old project hashes map to the corresponding detail page, replacing history to avoid redirect loops.
+- Titles, descriptions, canonicals, social metadata, image alternatives/dimensions, sitemap, base paths, all local links, and 133 local resource references passed the generated-site checks.
 
-## Local verification
+## Browser verification
 
-- Production build and generated-site checks passed for Home, Projects, About, the legacy Internship redirect, and custom 404.
-- All three main pages tested in light and dark themes at 320, 390, 768, and 1440 pixels without horizontal overflow.
-- Desktop and mobile screenshots inspected for readable text, portrait proportions, new monogram, AISEHack logo, alternating project previews, and research placement.
-- The original light palette remains; the dark palette uses slate surfaces, pale text, and soft blue links. All audited text/background pairs met their WCAG AA contrast threshold.
-- Theme follows the system initially, saves explicit choices across pages/reloads, responds to system changes when no choice is saved, and works when localStorage is denied. With JavaScript disabled, both system palettes and all content/navigation remain available; the manual toggle is hidden.
-- Keyboard skip links, visible focus, theme control, mobile menu opening, Escape focus restoration, page navigation, and reduced motion passed checks.
-- Projects begins with the internship and Copilot, then forecasting and hospital work, followed by ongoing VL-JEPA research. The old Internship URL forwards to Projects#copilot. Sitemap and canonical URLs use the current structure.
-- One resume link per main page, public email only on About, accurate CGPA without semester wording, unique metadata, image alternatives, local resources, and cross-page fragments passed checks.
-- Actual resume download succeeded and matches the current public source, 123,936 bytes. The existing owner commit a59f1af updated that source after the earlier supplied original; this update preserves it.
-- Portrait, AISEHack logo, self-hosted Manrope font, favicon, social image, stylesheet, and script loaded. No browser JavaScript errors occurred.
+- Main page and all four detail pages tested in both themes at 320, 390, 768, and 1440 px with no horizontal overflow.
+- Desktop/mobile screenshots inspected for the opening, project details, Skills, and complete flow. All images and logo badges loaded successfully.
+- All audited text/background combinations met their applicable WCAG AA contrast threshold.
+- Every header anchor landed below the sticky header; focus moved to the section. Mobile menu opened by keyboard, closed with Escape and restored focus, and closed before measuring the anchor scroll offset.
+- Browser Back/Forward retains useful section history and moves keyboard focus to the restored section. Native and no-JavaScript anchors were checked separately on desktop and mobile; header spacing is reserved once.
+- Theme selection persisted when opening a detail page. System preference, storage-denial handling, and reduced-motion support remain implemented.
+- Skip-to-content focus and navigation without JavaScript passed checks. No browser JavaScript errors occurred.
+- Actual resume download matches the current public source, 123,936 bytes. The owner's existing updated resume was preserved.
+- CSS and JavaScript references include content hashes so updated pages load the matching files.
 
-## Content and design sources
+## Sources and limits
 
-The owner supplied the AISEHack logo and confirmed the ongoing VL-JEPA work: surveillance anomaly detection and anomaly captions with UCA, comparing CLIP and SigLIP 2. No comparative findings or publication are claimed. The reference https://www.aahil-khan.xyz/ informed the grouped tools, split experience section, and alternating project previews; this portfolio retains its own content, colours, and typography.
+Copy uses supplied resumes, owner answers, and previously inspected public repositories and official AISEHack evidence. Technology logo sources and licenses are in `public/assets/icons/`. The reference website informed the section flow and layout; the portfolio retains its own content and theme.
+
+Project photos and demo videos still await the owner's files. A public VL-JEPA repository has not been supplied. No screen-reader session or physical-device testing was performed. Email opens a mail client; there is no contact-form service. No custom domain has been claimed or configured.
 
 ## Publication
 
-The existing GitHub Actions workflow publishes to https://07meet.github.io/portfolio/. The checks above refer to the local production build. Deployment success and live verification are reported in the task completion message.
-
-## Limits and pending content
-
-Project photos and demo videos await the owner's files and remain labelled as coming soon. A public VL-JEPA repository has not been supplied. Full LinkedIn content remains inaccessible; earlier copy uses supplied resumes and repository evidence. No screen-reader session or physical-device testing was performed. Contact opens an email client; there is no contact-form service. No custom domain has been claimed or configured.
+The existing GitHub Actions workflow publishes to https://07meet.github.io/portfolio/. These results refer to the local production build; deployment and live verification are confirmed in the task completion message.

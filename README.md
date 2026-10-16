@@ -1,8 +1,8 @@
 # Meet Patel's portfolio
 
-A static portfolio for AI/ML, data engineering, and analyst opportunities. Home, Projects, and About use self-hosted Manrope typography and Meet's portrait. The original light palette is paired with a slate dark theme; visitors can switch themes and their choice is remembered in their browser.
+A static portfolio for AI/ML, data engineering, and analyst opportunities. The main page flows through About, Skills, Projects, and Contact, with separate pages for project details. Self-hosted Manrope typography, Meet's portrait, light and slate dark themes, and remembered theme choices support the content.
 
-Home opens with a viewport-height introduction, followed by full-width Skills, Work, Research, and Contact invitation bands. Each band uses a distinct background in both themes. Skills are grouped into labelled rows with local technology logos.
+The opening fills the viewport. Skills, Projects, and Contact use full-width colour bands separated by lines. Ongoing VL-JEPA research shares the Projects background. A sticky header scrolls to sections; project previews open their individual detail pages. Skills use labelled rows with local technology logos.
 
 [Portfolio](https://07MEET.github.io/portfolio/) · [GitHub](https://github.com/07MEET) · [LinkedIn](https://www.linkedin.com/in/meet-patel-aiml/)
 
@@ -35,7 +35,9 @@ Generated files in `dist/` should not be edited or committed. The original suppl
 
 ## Content choices
 
-Projects begins with the Supreet Chemicals internship and Enterprise Knowledge Copilot, followed by PM2.5 Forecasting and Hospital Management System. A Research section introduces the ongoing VL-JEPA framework. The former Internship URL forwards to the relevant project. Home provides a concise overview; About contains education, focused capabilities, and contact links. Each page has one resume link in its shared navigation.
+The Projects section begins with the Supreet Chemicals internship and Enterprise Knowledge Copilot, followed by PM2.5 Forecasting and Hospital Management System. Ongoing VL-JEPA research follows within the same colour band. Education appears near the introduction and actual contact links finish the page. Each project has a dedicated detail page with its full available content and repository links. The research page remains labelled as ongoing; no repository is invented. Each page has one resume link in its shared navigation.
+
+Project routes are `/projects/enterprise-knowledge-copilot/`, `/projects/pm25-forecasting-system/`, `/projects/hospital-management-system/`, and `/projects/vl-jepa/`, under the configured base path. Legacy About, Projects, and Internship URLs redirect to their current destinations.
 
 The hackathon recognition supports the forecasting project and uses the owner's supplied AISEHack logo. The `research` field in `content/site.json` stores the VL-JEPA description, status, and optional repository. Keep it labelled as ongoing until results are available. School marks and a long skills inventory are omitted. Project performance percentages, production adoption, and business impact are not inferred from implementation details.
 
