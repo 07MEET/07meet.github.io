@@ -24,14 +24,14 @@ const navItems = [{ page: '', label: 'Home' }, { page: 'projects', label: 'Proje
 
 function header(currentPage) {
   return `<a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header wrap">
+  <header class="header-band"><div class="site-header wrap">
     <div class="header-brand"><a class="wordmark" href="${escape(base)}" aria-label="${escape(site.shortName)}, home">${monogram}${escape(site.shortName)}</a>${themeButton}</div>
     <button class="nav-toggle" type="button" aria-label="Open navigation" aria-controls="site-nav" aria-expanded="false"><span>Menu</span><span class="menu-mark" aria-hidden="true"><i></i><i></i></span></button>
     <nav id="site-nav" class="site-nav" aria-label="Main navigation">
       <ul class="nav-links">${navItems.map(({ page, label }) => `<li><a href="${escape(route(page))}"${page === currentPage ? ' aria-current="page"' : ''}>${label}</a></li>`).join('')}</ul>
       ${resumePath ? `<a class="resume-link" href="${escape(asset(resumePath))}" download aria-label="Download ${escape(site.shortName)}'s resume as a PDF">Resume ${downloadIcon}</a>` : ''}
     </nav>
-  </header>`;
+  </div></header>`;
 }
 
 function head(title, description, page) {
@@ -65,7 +65,7 @@ function head(title, description, page) {
   <script src="${escape(asset('site.js'))}" defer></script>${page === '404' || page === 'internship' ? '\n  <meta name="robots" content="noindex">' : ''}${page === 'internship' ? `\n  <meta http-equiv="refresh" content="0;url=${escape(redirect)}"><script>location.replace(${JSON.stringify(redirect)})</script>` : ''}`;
 }
 
-const footer = `<footer class="site-footer wrap"><p>© ${new Date().getFullYear()} ${escape(site.name)}</p></footer>`;
+const footer = `<footer class="site-footer-band"><div class="site-footer wrap"><p>© ${new Date().getFullYear()} ${escape(site.name)}</p></div></footer>`;
 
 function document(page, title, description, content, structuredData) {
   return `<!doctype html>
@@ -97,15 +97,27 @@ function projectCase(project, index, experience = null) {
   </article>`;
 }
 
-const home = `<section class="home-hero wrap" aria-labelledby="home-title">
+function previewImage(project) {
+  const image = project.images?.[0];
+  return image ? `<figure class="home-preview-image"><img src="${escape(asset(image.src))}" alt="${escape(image.alt)}"${image.width ? ` width="${escape(image.width)}"` : ''}${image.height ? ` height="${escape(image.height)}"` : ''} loading="lazy" decoding="async">${image.caption ? `<figcaption>${escape(image.caption)}</figcaption>` : ''}</figure>` : `<div class="media-placeholder photos-placeholder">${photoIcon}<p>Project photos coming soon</p></div>`;
+}
+
+const toolbox = site.toolbox || [
+  { category: 'Machine learning', items: [{ name: 'Python' }, { name: 'PyTorch' }, { name: 'NumPy' }] },
+  { category: 'Retrieval & APIs', items: [{ name: 'FastAPI' }, { name: 'ChromaDB' }, { name: 'BM25' }] },
+  { category: 'Data & applications', items: [{ name: 'PostgreSQL' }, { name: 'SQL' }, { name: 'Streamlit' }] }
+];
+
+const home = `<section class="home-band home-band-hero" aria-labelledby="home-title"><div class="home-hero wrap">
   <div class="home-copy"><p class="eyebrow">${escape(site.home.eyebrow)}</p><h1 id="home-title">${escape(site.shortName)}</h1><p class="home-role">${escape(site.home.role)}</p><p class="home-intro">${escape(site.home.intro)}</p><a class="button button-primary" href="${escape(route('projects'))}">Explore projects ${arrow}</a><p class="availability"><span class="status-dot" aria-hidden="true"></span>${escape(site.home.availability)}</p></div>
   <figure class="portrait"><img src="${escape(asset(site.portrait.src))}" alt="${escape(site.portrait.alt)}" width="${escape(site.portrait.width)}" height="${escape(site.portrait.height)}" fetchpriority="high" decoding="async"></figure>
-</section>
-<section class="home-tools wrap" aria-labelledby="home-tools-title"><h2 id="home-tools-title">Tools I build with</h2><div class="tool-groups">${[{ title: 'Models', project: site.projects.find((item) => item.id === 'forecasting') }, { title: 'Retrieval', project: site.experience.project }, { title: 'Data', project: site.projects.find((item) => item.id === 'hospital') }].map(({ title, project }) => `<div class="tool-group"><h3>${title}</h3><p>${project.technologies.map(escape).join(' · ')}</p></div>`).join('')}</div></section>
-<section class="home-experience wrap" aria-labelledby="home-experience-title"><div class="home-role-index"><p class="eyebrow">Internship</p><h2 id="home-experience-title">${escape(site.experience.role)}</h2><p>${escape(site.experience.organization)}</p><p class="date-label">${escape(site.experience.dates)}</p></div><div class="home-experience-copy"><p class="eyebrow">Retrieval & backend development</p><h3>${escape(site.experience.project.title)}</h3><p>${escape(site.experience.project.summary)}</p><a class="text-link" href="${escape(`${route('projects')}#copilot`)}">View internship project ${arrow}</a></div></section>
-<section class="home-work wrap" aria-labelledby="home-work-title"><div class="home-section-heading"><div><p class="eyebrow">Selected projects</p><h2 id="home-work-title">Models, databases, and applications.</h2></div><a class="text-link" href="${escape(route('projects'))}">All projects ${arrow}</a></div><div class="home-project-list">${site.projects.map((project, index) => `<article class="home-project-preview${index % 2 ? ' is-reversed' : ''}"><div class="media-placeholder photos-placeholder">${photoIcon}<p>Project photos coming soon</p></div><div class="home-project-copy"><p class="eyebrow">${escape(project.category)}</p><h3>${escape(project.title)}</h3><p class="preview-summary">${escape(project.summary)}</p><a class="text-link" href="${escape(`${route('projects')}#${project.id}`)}">Explore project ${arrow}</a></div></article>`).join('')}</div></section>
-${site.research ? `<section class="home-research wrap" aria-labelledby="home-research-title"><div><p class="eyebrow">${escape(site.research.status)}</p><h2 id="home-research-title">${escape(site.research.title)}</h2><p>${escape(site.research.summary)}</p></div><a class="text-link" href="${escape(`${route('projects')}#research`)}">Explore the research ${arrow}</a></section>` : ''}
-<div class="home-about-link wrap"><p>Education, capabilities, and ways to connect.</p><a class="text-link" href="${escape(route('about'))}">About & contact ${arrow}</a></div>`;
+  <a class="hero-scroll" href="#skills"><span>Scroll to explore</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16m-6-6 6 6 6-6"/></svg></a>
+</div></section>
+<section class="home-band home-band-skills" id="skills" aria-labelledby="home-tools-title"><div class="home-skills wrap"><p class="eyebrow">Toolbox</p><h2 id="home-tools-title">What I build with</h2><div class="skills-table">${toolbox.map((group) => `<div class="skills-row"><h3>${escape(group.category)}</h3><ul class="skill-pills" aria-label="${escape(group.category)} tools">${group.items.map((item) => `<li class="skill-pill">${item.icon ? `<span class="skill-logo"><img src="${escape(asset(item.icon))}" alt="" width="24" height="24" loading="lazy" decoding="async"></span>` : ''}<span>${escape(item.name)}</span></li>`).join('')}</ul></div>`).join('')}</div></div></section>
+<section class="home-band home-band-work" aria-label="Selected work"><div class="wrap"><section class="home-experience" aria-labelledby="home-experience-title"><div class="home-role-index"><p class="eyebrow">Internship</p><h2 id="home-experience-title">${escape(site.experience.role)}</h2><p>${escape(site.experience.organization)}</p><p class="date-label">${escape(site.experience.dates)}</p></div><div class="home-experience-copy"><p class="eyebrow">Retrieval & backend development</p><h3>${escape(site.experience.project.title)}</h3><p>${escape(site.experience.project.summary)}</p><a class="text-link" href="${escape(`${route('projects')}#copilot`)}">View internship project ${arrow}</a></div></section>
+<section class="home-work" aria-labelledby="home-work-title"><div class="home-section-heading"><div><p class="eyebrow">Selected projects</p><h2 id="home-work-title">Models, databases, and applications.</h2></div><a class="text-link" href="${escape(route('projects'))}">All projects ${arrow}</a></div><div class="home-project-list">${site.projects.map((project, index) => `<article class="home-project-preview${index % 2 ? ' is-reversed' : ''}">${previewImage(project)}<div class="home-project-copy"><p class="eyebrow">${escape(project.category)}</p><h3>${escape(project.title)}</h3><p class="preview-summary">${escape(project.summary)}</p><a class="text-link" href="${escape(`${route('projects')}#${project.id}`)}">Explore project ${arrow}</a></div></article>`).join('')}</div></section></div></section>
+${site.research ? `<section class="home-band home-band-research" aria-labelledby="home-research-title"><div class="home-research wrap"><div><p class="eyebrow">${escape(site.research.status)}</p><h2 id="home-research-title">${escape(site.research.title)}</h2><p>${escape(site.research.summary)}</p></div><a class="text-link" href="${escape(`${route('projects')}#research`)}">Explore the research ${arrow}</a></div></section>` : ''}
+<section class="home-band home-band-end" aria-labelledby="home-end-title"><div class="home-end wrap"><div><p class="eyebrow">What comes next</p><h2 id="home-end-title">Let's connect.</h2><p>Explore my education and capabilities, or get in touch about an opportunity.</p></div><a class="button button-primary" href="${escape(route('about'))}">About & contact ${arrow}</a></div></section>`;
 
 const research = site.research ? `<section class="research-section" id="research" aria-labelledby="research-title"><p class="eyebrow">${escape(site.research.status)}</p><h2 id="research-title">${escape(site.research.title)}</h2><div id="${escape(site.research.id)}"><p class="research-summary">${escape(site.research.summary)}</p>${site.research.context ? `<p class="project-context">${escape(site.research.context)}</p>` : ''}${site.research.technologies?.length ? `<ul class="tech-list" aria-label="Research technologies">${site.research.technologies.map((item) => `<li>${escape(item)}</li>`).join('')}</ul>` : ''}${site.research.details?.length ? `<div class="case-details">${site.research.details.map((detail) => `<section><h3>${escape(detail.heading)}</h3><p>${escape(detail.text)}</p></section>`).join('')}</div>` : ''}${site.research.repository ? `<a class="text-link research-link" href="${escape(site.research.repository)}">Research repository ${externalArrow}</a>` : ''}</div></section>` : '';
 

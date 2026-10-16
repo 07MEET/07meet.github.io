@@ -2,6 +2,8 @@
 
 A static portfolio for AI/ML, data engineering, and analyst opportunities. Home, Projects, and About use self-hosted Manrope typography and Meet's portrait. The original light palette is paired with a slate dark theme; visitors can switch themes and their choice is remembered in their browser.
 
+Home opens with a viewport-height introduction, followed by full-width Skills, Work, Research, and Contact invitation bands. Each band uses a distinct background in both themes. Skills are grouped into labelled rows with local technology logos.
+
 [Portfolio](https://07MEET.github.io/portfolio/) · [GitHub](https://github.com/07MEET) · [LinkedIn](https://www.linkedin.com/in/meet-patel-aiml/)
 
 ## Run locally
@@ -19,6 +21,7 @@ Open http://127.0.0.1:4173/portfolio/. Stop the preview with Ctrl+C. After editi
 ## Update the website
 
 - Edit names, introduction, project descriptions, links, experience, education, and contact details in [content/site.json](content/site.json). Keep project IDs consistent with the capability and experience links.
+- Edit skill categories and badges in the `toolbox` array. Each item has a `name` and optional local `icon` path. Icons are decorative because their technology name appears beside them. Asset sources and licenses are in `public/assets/icons/`.
 - Adjust colours, typography, and spacing in [public/site.css](public/site.css). Light and dark colour variables are grouped at the top. [Colour samples](docs/theme-samples.html) preserve the original design exploration.
 - Replace [public/resume.pdf](public/resume.pdf) when the resume changes. The approved off-campus resume is the current download. The `resume` field points to `resume.pdf`.
 - Replace the portrait at `public/assets/meet-patel.webp` when needed. The original supplied photo remains outside the published source.

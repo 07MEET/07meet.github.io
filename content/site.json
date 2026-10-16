@@ -17,7 +17,7 @@
   },
   "home": {
     "eyebrow": "B.Tech AI/ML · Class of 2027",
-    "role": "AI/ML student working with models and data.",
+    "role": "AI/ML student building retrieval and forecasting systems.",
     "intro": "I'm studying at NMIMS and building with Python and SQL. My work spans pollution forecasting, database applications, and document retrieval.",
     "availability": "Open to AI/ML, data engineering & analyst opportunities"
   },
@@ -208,5 +208,85 @@
     "technologies": [],
     "repository": null,
     "context": "The team is working with the UCA dataset and comparing the approach with CLIP and SigLIP 2."
-  }
+  },
+  "toolbox": [
+    {
+      "category": "Languages",
+      "items": [
+        {
+          "name": "Python",
+          "icon": "assets/icons/python.svg"
+        },
+        {
+          "name": "SQL"
+        }
+      ]
+    },
+    {
+      "category": "Frameworks & apps",
+      "items": [
+        {
+          "name": "FastAPI",
+          "icon": "assets/icons/fastapi.svg"
+        },
+        {
+          "name": "Streamlit",
+          "icon": "assets/icons/streamlit.svg"
+        }
+      ]
+    },
+    {
+      "category": "Data & databases",
+      "items": [
+        {
+          "name": "PostgreSQL",
+          "icon": "assets/icons/postgresql.svg"
+        },
+        {
+          "name": "NumPy",
+          "icon": "assets/icons/numpy.svg"
+        },
+        {
+          "name": "Pandas",
+          "icon": "assets/icons/pandas.svg"
+        },
+        {
+          "name": "xarray",
+          "icon": "assets/icons/xarray.svg"
+        }
+      ]
+    },
+    {
+      "category": "AI & retrieval",
+      "items": [
+        {
+          "name": "PyTorch",
+          "icon": "assets/icons/pytorch.svg"
+        },
+        {
+          "name": "ChromaDB",
+          "icon": "assets/icons/chroma.ico"
+        },
+        {
+          "name": "BM25"
+        },
+        {
+          "name": "Semantic search"
+        }
+      ]
+    },
+    {
+      "category": "Development tools",
+      "items": [
+        {
+          "name": "Git",
+          "icon": "assets/icons/git.svg"
+        },
+        {
+          "name": "Docker",
+          "icon": "assets/icons/docker.svg"
+        }
+      ]
+    }
+  ]
 }

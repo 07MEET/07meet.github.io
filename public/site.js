@@ -25,6 +25,15 @@ const applyTheme = (theme) => {
 applyTheme(savedTheme || (systemTheme.matches ? 'dark' : 'light'));
 document.documentElement.classList.add('has-js');
 
+const headerBand = document.querySelector('.header-band');
+if (headerBand && typeof ResizeObserver !== 'undefined') {
+  const updateHeaderHeight = () => {
+    document.documentElement.style.setProperty('--header-height', `${Math.ceil(headerBand.getBoundingClientRect().height)}px`);
+  };
+  updateHeaderHeight();
+  new ResizeObserver(updateHeaderHeight).observe(headerBand);
+}
+
 themeToggle?.addEventListener('click', () => {
   savedTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
   applyTheme(savedTheme);

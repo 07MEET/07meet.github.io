@@ -2,6 +2,14 @@
 
 The portfolio update was checked on 17 October 2026 using the production build and Chrome through Playwright.
 
+## Full-screen flow and skills revision
+
+- Home's opening fills at least the available viewport below the header and grows when mobile content needs more room. A keyboard-accessible scroll cue targets Skills.
+- Hero, Skills, Work, Research, and End backgrounds span the full viewport width and use five distinct colours in both light and dark themes. These dimensions and colour differences were checked at 320, 390, 768, and 1440 px.
+- Skills uses five labelled rows and fourteen badges. Eleven badges have locally hosted technology logos; concepts without a product logo use visible text. All logo images loaded successfully.
+- Desktop and mobile screenshots of the opening, Skills, and the complete page were visually inspected. Text contrast, no horizontal overflow, theme persistence/system fallback, storage denial, keyboard navigation, reduced motion, legacy redirects, and the current resume download all passed again.
+- Technology asset sources and license copies are recorded in `public/assets/icons/`.
+
 ## Local verification
 
 - Production build and generated-site checks passed for Home, Projects, About, the legacy Internship redirect, and custom 404.
