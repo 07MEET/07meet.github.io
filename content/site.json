@@ -288,5 +288,52 @@
         }
       ]
     }
+  ],
+  "otherProjects": [
+    {
+      "id": "los-angeles-crime-analysis",
+      "title": "Los Angeles Crime Analysis",
+      "category": "Power BI · Academic team project",
+      "summary": "Exploring reported crime trends, area patterns, and reporting delays through a four-page Power BI dashboard.",
+      "context": "A four-person academic team project at NMIMS using LAPD open data for 2010–2025.",
+      "technologies": [
+        "Power BI",
+        "Power Query",
+        "DAX",
+        "Data modelling"
+      ],
+      "repository": null,
+      "dashboardUrl": "https://app.powerbi.com/view?r=eyJrIjoiMmEwNThjODQtNTRhOC00MWU2LTlmNGYtMWE1N2MwODY4YzBiIiwidCI6ImQxZjE0MzQ4LWYxYjUtNGEwOS1hYzk5LTdlYmYyMTNjYmM4MSIsImMiOjEwfQ%3D%3D",
+      "sourceUrl": "https://data.lacity.org/Public-Safety/Crime-Data-from-2010-to-2019/63jg-8b9z",
+      "sourceLabel": "Historical dataset (2010–2019)",
+      "video": null,
+      "images": [],
+      "details": [
+        {
+          "heading": "The question",
+          "text": "How do recorded incidents vary over time, across areas, by crime type and victim demographics, and how long after occurrence are they reported?"
+        },
+        {
+          "heading": "My role in the team",
+          "text": "My main contributions were dashboard design, DAX calculations, and data cleaning, working within the four-person team."
+        },
+        {
+          "heading": "Data preparation and modelling",
+          "text": "The team combined historical CSV data, cleaned duplicate, null, and invalid entries, and derived year, month, weekday, and report-delay fields. A Fact_Crime table connects to date, area, crime-type, premise, weapon, and status dimensions."
+        },
+        {
+          "heading": "DAX calculations",
+          "text": "Calculations cover total incidents, 2023-versus-2024 year-on-year growth, average reporting delay, average crimes per area, victim-sex percentages, and crime-time conversion. DIVIDE and blank handling are used for ratio calculations."
+        },
+        {
+          "heading": "Dashboard experience",
+          "text": "Four linked report pages cover an overview, geographic hotspot analysis, victim profiling, and incident-level drill-through. Slicers and a decomposition tree support exploration by area, crime category, victim sex, and premises."
+        },
+        {
+          "heading": "Project scope",
+          "text": "The project explores recorded incidents using combined historical data described in the report as covering 2010–2025. The linked historical source covers 2010–2019. Interpret totals and year-on-year figures alongside dataset coverage, reporting lag, and active filters."
+        }
+      ]
+    }
   ]
 }

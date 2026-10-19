@@ -15,6 +15,7 @@ const definitions = [
   { name: 'Forecasting', file: 'projects/pm25-forecasting-system/index.html', route: 'projects/pm25-forecasting-system/', repository: config.projects.find(x => x.id === 'forecasting').repository },
   { name: 'Hospital', file: 'projects/hospital-management-system/index.html', route: 'projects/hospital-management-system/', repository: config.projects.find(x => x.id === 'hospital').repository },
   { name: 'Research', file: 'projects/vl-jepa/index.html', route: 'projects/vl-jepa/' },
+  ...(config.otherProjects || []).map(project => ({ name: project.title, file: `projects/${project.id}/index.html`, route: `projects/${project.id}/`, repository: project.repository, dashboardUrl: project.dashboardUrl, showVideoPlaceholder: project.showVideoPlaceholder })),
   { name: 'Legacy projects', file: 'projects/index.html', route: 'projects/', target: base + '#projects' },
   { name: 'Legacy about', file: 'about/index.html', route: 'about/', target: base + '#about' },
   { name: 'Legacy internship', file: 'internship/index.html', route: 'internship/', target: base + 'projects/enterprise-knowledge-copilot/' },
@@ -93,6 +94,11 @@ for (const page of pages) {
   if (name === 'Home') check((html.match(/href="mailto:/g)||[]).length === 1, 'Home: one contact email required.');
   else check(!/<a\b[^>]*href="mailto:/.test(html), `${name}: contact belongs at the end of Home.`);
   if (page.repository) check(html.includes(page.repository), `${name}: repository missing.`);
+  if (page.dashboardUrl) {
+    check(links.some(link => link.href === page.dashboardUrl), `${name}: published dashboard link missing.`);
+    if (!page.repository) check(!/View code on GitHub/.test(html), `${name}: unexpected GitHub action.`);
+    if (page.showVideoPlaceholder === false) check(!/Demo video coming soon/.test(html), `${name}: unnecessary video placeholder.`);
+  }
 }
 const home = pages.find(x => x.name === 'Home')?.html || '';
 let lastPosition = -1;
@@ -100,8 +106,12 @@ for (const section of ['about','skills','projects','contact']) {
   const position = home.indexOf(`id="${section}"`); check(position > lastPosition, `Home: missing/out-of-order ${section}.`); lastPosition = position;
 }
 check(home.includes('assets/meet-patel.webp'), 'Home: portrait missing.');
-check(/CGPA/.test(home) && !/through\s+semester/i.test(home), 'Home: education/CGPA missing or obsolete.');
-for (const page of pages.filter(x => x.repository || x.name === 'Research')) check(home.includes(`href="${base}${page.route}"`), `Home: detail link to ${page.name} missing.`);
+check(!/hero-education|CGPA|Scroll to explore/.test(home), 'Home: removed education row or scroll prompt remains.');
+for (const page of pages.filter(x => x.repository || x.name === 'Research' || x.dashboardUrl)) check(home.includes(`href="${base}${page.route}"`), `Home: detail link to ${page.name} missing.`);
+if (config.otherProjects?.length) {
+  const other = home.indexOf('id="other-projects-title"');
+  check(other > home.indexOf('id="home-research-title"') && other < home.indexOf('id="contact"'), 'Home: Other projects must follow research and precede Contact.');
+}
 const research = pages.find(x => x.name === 'Research')?.html || '';
 check(/ongoing/i.test(research) && /UCA/.test(research) && /SigLIP/.test(research), 'Research: verified ongoing description missing.');
 check((pages.find(x => x.name === 'Forecasting')?.html || '').includes('assets/aisehack.webp'), 'Forecasting: award logo missing.');
@@ -112,4 +122,4 @@ const sitemap = await readFile(path.join(dist,'sitemap.xml'),'utf8');
 for (const page of pages.filter(x => !x.target && x.name !== '404')) check(sitemap.toLowerCase().includes(page.url.href.toLowerCase()), `Sitemap omits ${page.name}.`);
 for (const file of ['404.html','robots.txt','.nojekyll']) await stat(path.join(dist,file)).catch(()=>failures.push(`Missing ${file}`));
 if (failures.length) { console.error(failures.map(x=>'FAIL: '+x).join('\n')); process.exitCode=1; }
-else console.log(`Static checks passed: homepage, four project details, legacy routes, ${resourceCount} local resources, anchor navigation, metadata, privacy, contact, focus and themes.`);
+else console.log(`Static checks passed: homepage, ${definitions.filter(x => !x.target && !['Home','404'].includes(x.name)).length} project details, legacy routes, ${resourceCount} local resources, anchor navigation, metadata, privacy, contact, focus and themes.`);

@@ -39,6 +39,10 @@ The Projects section begins with the Supreet Chemicals internship and Enterprise
 
 Project routes are `/projects/enterprise-knowledge-copilot/`, `/projects/pm25-forecasting-system/`, `/projects/hospital-management-system/`, and `/projects/vl-jepa/`, under the configured base path. Legacy About, Projects, and Internship URLs redirect to their current destinations.
 
+Other projects appears below VL-JEPA within Projects. Its `otherProjects` array currently includes Los Angeles Crime Analysis at `/projects/los-angeles-crime-analysis/`. The entry links to its published Power BI dashboard and historical dataset, with the same media placeholders as the other projects. Team wording is retained and Meet's confirmed contributions are dashboard design, DAX, and data cleaning.
+
+For projects without a repository, leave `repository` null. Use `dashboardUrl` for a published dashboard and optional `sourceUrl`/`sourceLabel` for a dataset. Setting `showVideoPlaceholder` to false omits the unused video block and lets screenshots use the full page width.
+
 The hackathon recognition supports the forecasting project and uses the owner's supplied AISEHack logo. The `research` field in `content/site.json` stores the VL-JEPA description, status, and optional repository. Keep it labelled as ongoing until results are available. School marks and a long skills inventory are omitted. Project performance percentages, production adoption, and business impact are not inferred from implementation details.
 
 ## GitHub Pages and domains

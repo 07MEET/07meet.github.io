@@ -2,6 +2,22 @@
 
 The continuous-page revision was checked on 17 October 2026 using the production build and Chrome through Playwright.
 
+## Introduction cleanup — 19 October 2026
+
+- Removed the university/CGPA row, the visible name beside the header monogram, and the Scroll to explore prompt. The header home link retains its accessible name.
+- Production build and static checks passed for five project detail pages and 146 local resource references.
+- Visually inspected the updated desktop and mobile opening in Chrome. The header controls, main name, introduction, and portrait remain correctly arranged.
+
+## Power BI addition — 19 October 2026
+
+- Reviewed all nine pages of the supplied C202 DHV report visually, extracted its text and URL annotations, and matched the published Power BI overview to the report. The dashboard opened publicly and rendered without sign-in.
+- Added Los Angeles Crime Analysis under Other projects, directly below VL-JEPA and before Contact, within the existing Projects colour band.
+- The new detail page includes the verified dashboard URL, accurately labelled historical dataset link, team credit, and the owner's confirmed contributions: dashboard design, DAX, and data cleaning.
+- At the owner's request, report screenshots were removed from public assets. The homepage and detail page use the same media placeholders as the other projects. No GitHub link is shown. The source report itself is not copied into public assets.
+- Production build and static checks passed with five project detail pages, a sitemap entry for the new route, and 147 local resource references after the screenshot removal.
+- Main page and the new detail page tested in light/dark mode at 320, 390, 768, and 1440 px without horizontal overflow. Heading order, subsection placement, dashboard URL, source label, and visible keyboard focus on the dashboard action passed checks. No browser JavaScript errors occurred. Media placeholders and the retained dashboard link were checked after the screenshot removal.
+- Desktop and mobile renderings were visually inspected. Existing layout, navigation, and content were preserved.
+
 ## Structure and content
 
 - The main page contains About, Skills, Projects, and Contact in that order. The header stays visible while scrolling and its links move to those sections.

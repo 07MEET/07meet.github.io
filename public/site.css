@@ -115,21 +115,16 @@ a, button, [tabindex] { scroll-margin-bottom: 20px; }
 .home-band-skills { --band-bg: var(--skills-bg); --line: var(--skills-line); --panel: var(--skills-pill-bg); }
 .home-band-work { --band-bg: var(--work-bg); --surface: var(--work-surface); --panel: var(--work-panel); }
 .home-band-end { --band-bg: var(--end-bg); }
-.home-hero { display: grid; grid-template-columns: 1.4fr 1fr; grid-template-rows: 1fr auto; align-items: center; gap: 35px 65px; min-height: calc(100svh - var(--header-height)); padding-block: 48px 26px; }
+.home-hero { display: grid; grid-template-columns: 1.4fr 1fr; grid-template-rows: 1fr; align-items: center; gap: 35px 65px; min-height: calc(100svh - var(--header-height)); padding-block: 48px 26px; }
 .home-copy .eyebrow { margin-bottom: 19px; }
 .home-copy h1 { font-size: clamp(90px, 7.8vw, 110px); font-weight: 700; letter-spacing: -.065em; line-height: 1.07; }
 .home-role { font-size: 26px; font-weight: 550; line-height: 1.5; letter-spacing: -.035em; margin-top: 23px; max-width: 640px; }
 .home-intro { color: var(--muted); font-size: 21px; line-height: 1.85; max-width: 620px; margin-top: 19px; }
-.hero-education { display: flex; flex-wrap: wrap; gap: 7px 17px; color: var(--muted); font-size: 15px; line-height: 1.8; margin-top: 19px; }
-.hero-education > span + span { border-left: 1px solid var(--line); padding-left: 17px; }
 .home-copy .button { margin-top: 28px; }
 .availability { display: flex; align-items: flex-start; gap: 9px; max-width: 510px; color: var(--muted); font-size: 14px; line-height: 1.8; margin-top: 20px; }
 .status-dot { width: 5px; height: 5px; flex: none; background: var(--accent); border-radius: 50%; margin-top: 9px; }
 .portrait { width: 365px; max-width: 100%; justify-self: end; padding: 9px; border: 1px solid var(--line); border-radius: 18px; background: var(--panel); box-shadow: 0 16px 45px #17203308; }
 .portrait img { display: block; width: 100%; height: auto; border-radius: 11px; }
-.hero-scroll { grid-column: 1 / -1; justify-self: start; align-self: end; display: inline-flex; align-items: center; gap: 25px; min-height: 40px; color: var(--muted); font-size: 14px; }
-.hero-scroll .icon { width: 17px; height: 21px; color: var(--accent); }
-.hero-scroll:hover { color: var(--ink); }
 
 .home-skills { padding-block: 83px 89px; }
 .home-skills > h2, .home-work-heading h2 { font-size: 47px; letter-spacing: -.05em; margin-top: 13px; }
@@ -160,6 +155,7 @@ a, button, [tabindex] { scroll-margin-bottom: 20px; }
 .home-project-preview.is-reversed .media-placeholder, .home-project-preview.is-reversed .home-preview-image { order: 2; }
 .home-project-preview.is-reversed .home-project-copy { order: 1; }
 .home-project-copy h3 { font-size: 31px; letter-spacing: -.04em; margin-top: 12px; }
+.home-project-copy h4 { font-size: 31px; font-weight: 650; letter-spacing: -.04em; line-height: 1.25; margin: 12px 0 0; }
 .preview-summary { color: var(--muted); font-size: 18px; line-height: 1.9; margin-top: 18px; }
 .home-project-copy .text-link { margin-top: 22px; }
 .home-research-band { border-top: 1px solid var(--line); }
@@ -167,6 +163,10 @@ a, button, [tabindex] { scroll-margin-bottom: 20px; }
 .home-research h3 { font-size: 31px; letter-spacing: -.04em; margin-top: 12px; }
 .home-research p:not(.eyebrow) { color: var(--muted); font-size: 18px; line-height: 1.9; margin-top: 16px; max-width: 740px; }
 .home-research > .text-link { white-space: nowrap; }
+.home-other-projects-band { border-top: 1px solid var(--line); }
+.home-other-projects { padding-block: 61px 77px; }
+.home-other-projects > h3 { font-size: 31px; letter-spacing: -.04em; }
+.other-project-list { display: grid; gap: 53px; margin-top: 35px; }
 .home-contact { display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: 70px; padding-block: 82px 87px; }
 .home-contact h2 { font-size: 49px; letter-spacing: -.05em; margin-top: 13px; }
 .home-contact p:not(.eyebrow) { color: var(--muted); font-size: 18px; line-height: 1.9; margin-top: 19px; max-width: 620px; }
@@ -195,6 +195,8 @@ a, button, [tabindex] { scroll-margin-bottom: 20px; }
 .award > .icon { width: 17px; height: 17px; margin-left: 12px; color: var(--accent); }
 .award:hover b { text-decoration: underline; text-underline-offset: 5px; }
 .project-media { display: grid; grid-template-columns: 1.45fr 1fr; gap: 22px; margin-top: 35px; }
+.project-media.no-video { grid-template-columns: 1fr; }
+.project-media.no-video .photo-gallery { grid-template-columns: 1fr; gap: 28px; }
 .media-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; min-height: 205px; height: 100%; padding: 27px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
 .video-placeholder { background: var(--panel); }
 .media-icon { width: 32px; height: 32px; fill: none; stroke: var(--icon-muted); stroke-width: 1.25; }
@@ -238,6 +240,7 @@ figcaption { color: var(--muted); font-size: 14px; line-height: 1.8; margin-top:
   .home-research > .text-link { white-space: normal; }
   .skills-row { grid-template-columns: 165px 1fr; gap: 25px; }
   .home-project-copy h3 { font-size: 28px; }
+  .home-project-copy h4 { font-size: 28px; }
   .home-contact { grid-template-columns: 1fr; gap: 35px; }
   .contact-links { justify-self: start; }
   .internship-context { grid-template-columns: 1fr; gap: 17px; }
@@ -272,18 +275,15 @@ figcaption { color: var(--muted); font-size: 14px; line-height: 1.8; margin-top:
   .wordmark-symbol { width: 33px; height: 31px; }
   .nav-links { gap: 6px 24px; }
   .site-footer { min-height: 76px; font-size: 14px; }
-  .home-hero { grid-template-columns: 1fr; grid-template-rows: 1fr auto auto; gap: 27px; padding-block: 36px 23px; }
+  .home-hero { grid-template-columns: 1fr; grid-template-rows: 1fr auto; gap: 27px; padding-block: 36px 23px; }
   .home-copy h1 { font-size: clamp(62px, 15vw, 78px); }
   .home-copy .eyebrow { margin-bottom: 17px; }
   .home-role { font-size: 24px; margin-top: 20px; line-height: 1.5; }
   .home-intro { font-size: 20px; margin-top: 17px; line-height: 1.8; }
-  .hero-education { font-size: 14px; margin-top: 17px; gap: 6px 13px; }
-  .hero-education > span + span { padding-left: 13px; }
   .home-copy .button { margin-top: 25px; }
   .availability { font-size: 14px; margin-top: 18px; }
   .portrait { width: 240px; justify-self: start; padding: 8px; border-radius: 15px; }
   .portrait img { border-radius: 9px; }
-  .hero-scroll { min-height: 36px; margin-top: 3px; }
   .home-skills { padding-block: 52px 56px; }
   .home-skills > h2, .home-work-heading h2 { font-size: 37px; margin-top: 12px; }
   .skills-table { margin-top: 29px; }
@@ -309,6 +309,9 @@ figcaption { color: var(--muted); font-size: 14px; line-height: 1.8; margin-top:
   .home-project-copy .text-link { margin-top: 17px; }
   .home-research { gap: 24px; padding-block: 47px 53px; }
   .home-research h3 { font-size: 28px; }
+  .home-other-projects { padding-block: 47px 56px; }
+  .home-other-projects > h3 { font-size: 28px; }
+  .other-project-list { gap: 41px; margin-top: 27px; }
   .home-contact { gap: 29px; padding-block: 53px 59px; }
   .home-contact h2 { font-size: 40px; }
   .home-contact p:not(.eyebrow) { font-size: 18px; margin-top: 18px; }
@@ -347,8 +350,6 @@ figcaption { color: var(--muted); font-size: 14px; line-height: 1.8; margin-top:
   .nav-links { gap: 5px 20px; }
   .home-copy h1 { font-size: 59px; }
   .home-role { font-size: 23px; }
-  .hero-education { flex-direction: column; gap: 4px; }
-  .hero-education > span + span { border-left: 0; padding-left: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -358,7 +359,7 @@ figcaption { color: var(--muted); font-size: 14px; line-height: 1.8; margin-top:
 @media print {
   :root, :root[data-theme], :root:not([data-theme]) { color-scheme: light; --paper: #ffffff; --panel: #ffffff; --ink: #172033; --accent: #3658bf; --muted: #59647a; --line: #dce1eb; --surface: #edf0f7; --on-accent: #ffffff; --hero-bg: #ffffff; --skills-bg: #ffffff; --work-bg: #ffffff; --end-bg: #ffffff; }
   .header-band { position: static; }
-  .nav-toggle, .site-nav, .theme-toggle, .hero-scroll { display: none !important; }
+  .nav-toggle, .site-nav, .theme-toggle { display: none !important; }
   .wrap { width: 100%; }
   body { background: white; font-size: 11pt; }
   .home-hero, .detail-page { padding-block: 20px; }
