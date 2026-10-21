@@ -2,6 +2,15 @@
 
 The continuous-page revision was checked on 17 October 2026 using the production build and Chrome through Playwright.
 
+## Publishing repair — 21 October 2026
+
+- Confirmed that the repository was renamed from `portfolio` to `07meet.github.io`; both the old project address and the new root address returned 404 before repair. The latest deployment had built documentation with Jekyll instead of the generated portfolio.
+- Authenticated inspection confirmed that Pages currently uses GitHub Actions, has no custom domain, and enforces HTTPS. Updated the configured base path to `/` for the account-level site and changed the local preview to read that same configuration.
+- Updated the repository references, live address, and publishing instructions. The existing custom workflow builds and checks the website before deploying only `dist/`.
+- Production build and static checks passed for the homepage, five project detail pages, three legacy routes, and 146 local resource references at the new root.
+- Chrome checks passed for the root homepage, loaded assets, all five detail pages, mobile section navigation, persisted theme, legacy project hashes, and the resume matching the public source. Desktop and mobile screenshots were inspected.
+- The current public address is https://07meet.github.io/. Earlier records below describe checks made before the repository rename.
+
 ## Introduction cleanup — 19 October 2026
 
 - Removed the university/CGPA row, the visible name beside the header monogram, and the Scroll to explore prompt. The header home link retains its accessible name.
@@ -48,4 +57,4 @@ Project photos and demo videos still await the owner's files. A public VL-JEPA r
 
 ## Publication
 
-The existing GitHub Actions workflow publishes to https://07meet.github.io/portfolio/. These results refer to the local production build; deployment and live verification are confirmed in the task completion message.
+The existing GitHub Actions workflow publishes to https://07meet.github.io/. These results refer to the local production build; deployment and live verification are confirmed in the task completion message.

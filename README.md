@@ -4,7 +4,7 @@ A static portfolio for AI/ML, data engineering, and analyst opportunities. The m
 
 The opening fills the viewport. Skills, Projects, and Contact use full-width colour bands separated by lines. Ongoing VL-JEPA research shares the Projects background. A sticky header scrolls to sections; project previews open their individual detail pages. Skills use labelled rows with local technology logos.
 
-[Portfolio](https://07MEET.github.io/portfolio/) · [GitHub](https://github.com/07MEET) · [LinkedIn](https://www.linkedin.com/in/meet-patel-aiml/)
+[Portfolio](https://07meet.github.io/) · [Source repository](https://github.com/07MEET/07meet.github.io) · [LinkedIn](https://www.linkedin.com/in/meet-patel-aiml/)
 
 ## Run locally
 
@@ -16,7 +16,7 @@ node scripts/check.mjs
 node scripts/serve.mjs
 ```
 
-Open http://127.0.0.1:4173/portfolio/. Stop the preview with Ctrl+C. After editing content or styles, rebuild and refresh the browser. The equivalent npm commands are `npm run build`, `npm run check`, and `npm run dev`.
+Open http://127.0.0.1:4173/. The preview server reads the base path from the same content configuration as the build. Stop the preview with Ctrl+C. After editing content or styles, rebuild and refresh the browser. The equivalent npm commands are `npm run build`, `npm run check`, and `npm run dev`.
 
 ## Update the website
 
@@ -35,7 +35,7 @@ Generated files in `dist/` should not be edited or committed. The original suppl
 
 ## Content choices
 
-The Projects section begins with the Supreet Chemicals internship and Enterprise Knowledge Copilot, followed by PM2.5 Forecasting and Hospital Management System. Ongoing VL-JEPA research follows within the same colour band. Education appears near the introduction and actual contact links finish the page. Each project has a dedicated detail page with its full available content and repository links. The research page remains labelled as ongoing; no repository is invented. Each page has one resume link in its shared navigation.
+The Projects section begins with the Supreet Chemicals internship and Enterprise Knowledge Copilot, followed by PM2.5 Forecasting and Hospital Management System. Ongoing VL-JEPA research follows within the same colour band. Contact links finish the page. Each project has a dedicated detail page with its full available content and repository links. The research page remains labelled as ongoing; no repository is invented. Each page has one resume link in its shared navigation.
 
 Project routes are `/projects/enterprise-knowledge-copilot/`, `/projects/pm25-forecasting-system/`, `/projects/hospital-management-system/`, and `/projects/vl-jepa/`, under the configured base path. Legacy About, Projects, and Internship URLs redirect to their current destinations.
 
@@ -47,7 +47,7 @@ The hackathon recognition supports the forecasting project and uses the owner's 
 
 ## GitHub Pages and domains
 
-The configured origin is `https://07MEET.github.io` and repository path is `/portfolio/`. GitHub Pages must use **GitHub Actions** as its publishing source. The workflow builds static files with Node.js 24 and deploys only `dist/`.
+The repository is `07MEET/07meet.github.io`, so the configured origin is `https://07meet.github.io` and the base path is `/`. GitHub Pages must use **GitHub Actions** as its publishing source. The workflow builds static files with Node.js 24 and deploys only `dist/`. Publishing the repository root or `docs/` directly omits the generated website and causes a 404. After renaming a repository, update the base path before deploying.
 
 See [the deployment and domain guide](docs/deployment.md) for Pages settings, Student Pack eligibility, current Namecheap terms, DNS verification, and HTTPS. GitHub Pages requires no Student Pack. A promotional domain is not permanently free; NMIMS India eligibility for the Namecheap offer remains unconfirmed.
 

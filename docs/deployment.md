@@ -1,10 +1,10 @@
 # Deployment and domain guide
 
-Checked against official sources on 14 October 2026. The portfolio has been published to GitHub Pages and verified over HTTPS. No custom domain has been registered or configured.
+Publishing configuration rechecked on 21 October 2026. Domain and Student Pack information below was checked against official sources on 14 October 2026. No custom domain has been registered or configured.
 
 ## GitHub Pages first
 
-The public repository is [07MEET/portfolio](https://github.com/07MEET/portfolio), with the live address **https://07meet.github.io/portfolio/**. Authenticated inspection confirmed that the repository did not exist before creation. It now publishes through GitHub Actions with HTTPS enforced. [Successful deployment](https://github.com/07MEET/portfolio/actions/runs/38523247703)
+The public repository was renamed to [07MEET/07meet.github.io](https://github.com/07MEET/07meet.github.io), so its live address is **https://07meet.github.io/**. The site must publish through its custom GitHub Actions workflow with HTTPS enforced. The old `/portfolio/` path no longer matches this account-level repository.
 
 GitHub Pages is available for public repositories on GitHub Free. You do **not** need the Student Developer Pack to host this site. The portfolio contains static HTML, CSS, JavaScript, and images; the Node build runs before deployment and no server runs on Pages. [GitHub Pages documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)
 
@@ -18,13 +18,13 @@ node scripts/check.mjs
 node scripts/serve.mjs
 ```
 
-Open **http://127.0.0.1:4173/portfolio/**. The production files are generated in `dist/`. Change portfolio copy in [content/site.json](../content/site.json), then rebuild. Do not edit generated files in `dist/`.
+Open **http://127.0.0.1:4173/**. The preview reads the configured base path automatically. The production files are generated in `dist/`. Change portfolio copy in [content/site.json](../content/site.json), then rebuild. Do not edit generated files in `dist/`.
 
 ### Publish the prepared site
 
-1. Sign into GitHub as `07MEET` using normal account authorization. Create a public repository named `portfolio` if it does not exist. If it exists, inspect its contents, default branch, Actions, Pages settings, and any domain before proceeding.
+1. Sign into GitHub as `07MEET` using normal account authorization. Use the existing public repository `07meet.github.io`. Inspect its contents, default branch, Actions, Pages settings, and any domain before proceeding.
 2. Upload or push the source on the `main` branch. Review the tracked files first: the original source resumes, research notes, and temporary inspection files are excluded. The explicitly approved off-campus resume is included as `public/resume.pdf`.
-3. In the repository, open **Settings → Pages → Build and deployment**, and choose **GitHub Actions** as the source.
+3. In the repository, open **Settings → Pages → Build and deployment**, and choose **GitHub Actions** as the source. Do not choose a branch or `docs/`: those contain source and documentation, not the built site.
 4. The prepared [deployment workflow](../.github/workflows/deploy.yml) builds and checks the site, uploads only `dist/`, and deploys it through GitHub's Pages actions. A push to `main` starts it; **Actions → Deploy portfolio to GitHub Pages → Run workflow** can also start a deployment manually.
 5. Wait for the Actions run to succeed. Open the deployment URL reported by its `github-pages` environment. Check the live homepage, project pages, assets, contact link, social links, and approved resume download.
 
@@ -36,12 +36,12 @@ The default configuration in [content/site.json](../content/site.json) is:
 
 ```json
 {
-  "siteUrl": "https://07MEET.github.io",
-  "basePath": "/portfolio/"
+  "siteUrl": "https://07meet.github.io",
+  "basePath": "/"
 }
 ```
 
-Keep the trailing slash. If the repository is renamed, update `basePath` to the new repository name and rebuild. A repository named `07MEET.github.io` would publish at the account root and need `basePath` set to `/`. A custom domain also needs `/` and its full HTTPS origin in `siteUrl`. This updates internal paths, canonical URLs, and social sharing URLs together.
+Keep the trailing slash. The account repository `07meet.github.io` publishes at the root and needs `/`. A project repository such as `portfolio` needs `/portfolio/`. If the repository is renamed, update this value and rebuild. A custom domain also needs `/` and its full HTTPS origin in `siteUrl`. This updates internal paths, canonical URLs, and social sharing URLs together.
 
 ## Student Pack and Namecheap
 
